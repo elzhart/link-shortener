@@ -1,0 +1,71 @@
+plugins {
+    id 'idea'
+    id 'java'
+    id 'org.springframework.boot' version "$spring_boot_version"
+    id 'io.spring.dependency-management' version "$dependency_management_version"
+}
+
+allprojects {
+
+    apply plugin: "java"
+    apply plugin: "io.spring.dependency-management"
+    apply plugin: 'jacoco'
+
+    group = 'com.elzhart.shortener'
+    version = '1.0.0-SNAPSHOT'
+    sourceCompatibility = '21'
+
+    idea {
+        project {
+            jdkName = '21'
+            languageLevel = '21'
+            vcs = 'Git'
+        }
+    }
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(21)
+        }
+    }
+
+    jacoco {
+        toolVersion = "0.8.11"
+    }
+
+
+    repositories {
+        mavenCentral()
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = 'UTF-8'
+    }
+
+    configurations {
+        developmentOnly
+        runtimeClasspath {
+            extendsFrom developmentOnly
+        }
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.boot:spring-boot-starter-parent:$spring_boot_version"
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:$spring_cloud_version"
+        }
+    }
+
+    dependencies {
+        compileOnly "org.projectlombok:lombok:$lombok_version"
+        annotationProcessor "org.projectlombok:lombok:$lombok_version"
+        implementation "com.google.guava:guava:$guava_version"
+    }
+    test {
+        useJUnitPlatform()
+        finalizedBy jacocoTestReport
+    }
+}
