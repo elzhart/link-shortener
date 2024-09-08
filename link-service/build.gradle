@@ -1,1 +1,27 @@
+plugins {
+    id 'idea'
+    id 'java'
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
+}
+
 group = 'com.elzhart.shortener.link-service'
+
+dependencies {
+    // Security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server:$spring_boot_version"
+
+    // Migration
+    implementation "org.liquibase:liquibase-core:$liquibase_version"
+
+    // Test
+    testImplementation "org.springframework.boot:spring-boot-starter-test:$spring_boot_version"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junit_version"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junit_version"
+    testImplementation 'org.springframework.security:spring-security-test'
+
+    testImplementation "org.testcontainers:postgresql:$testcontainers_version"
+    testImplementation "com.redis:testcontainers-redis:$redis_testcontainers_version"
+    testImplementation "org.testcontainers:junit-jupiter:$testcontainers_version"
+}
