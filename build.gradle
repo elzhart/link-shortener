@@ -8,6 +8,7 @@ plugins {
 allprojects {
 
     apply plugin: "java"
+    apply plugin: "org.springframework.boot"
     apply plugin: "io.spring.dependency-management"
     apply plugin: 'jacoco'
 
@@ -38,6 +39,28 @@ allprojects {
         mavenCentral()
     }
 
+    dependencies {
+        implementation "org.springframework.boot:spring-boot-starter:$spring_boot_version"
+        implementation "org.springframework.boot:spring-boot-starter-web:$spring_boot_version"
+        implementation "org.springframework.boot:spring-boot-starter-validation"
+
+        // Lombok
+        compileOnly "org.projectlombok:lombok:$lombok_version"
+        annotationProcessor "org.projectlombok:lombok:$lombok_version"
+
+        // Database
+        implementation "org.springframework.boot:spring-boot-starter-data-jpa:$spring_boot_version"
+        implementation "org.postgresql:postgresql:$postgresql_version"
+
+        // Metrics
+        implementation "org.springframework.boot:spring-boot-starter-actuator:$spring_boot_version"
+
+        // Cache
+        implementation "org.springframework.boot:spring-boot-starter-data-redis:$spring_boot_version"
+        implementation "org.springframework.boot:spring-boot-starter-cache:$spring_boot_version"
+        implementation "redis.clients:jedis:$jedis_version"
+    }
+
     tasks.withType(JavaCompile).configureEach {
         options.encoding = 'UTF-8'
     }
@@ -57,15 +80,5 @@ allprojects {
             mavenBom "org.springframework.boot:spring-boot-starter-parent:$spring_boot_version"
             mavenBom "org.springframework.cloud:spring-cloud-dependencies:$spring_cloud_version"
         }
-    }
-
-    dependencies {
-        compileOnly "org.projectlombok:lombok:$lombok_version"
-        annotationProcessor "org.projectlombok:lombok:$lombok_version"
-        implementation "com.google.guava:guava:$guava_version"
-    }
-    test {
-        useJUnitPlatform()
-        finalizedBy jacocoTestReport
     }
 }
