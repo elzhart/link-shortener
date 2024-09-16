@@ -105,7 +105,7 @@ public class SecurityConfig {
         return NimbusJwtDecoder.withPublicKey(this.rsaPublicKey).build();
     }
 
-    // Extract authorities from the roles claim
+    // Extract roles from the roles claim
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
         var jwtGrantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();

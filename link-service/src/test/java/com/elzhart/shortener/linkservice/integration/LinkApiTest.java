@@ -22,7 +22,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class LinkApiTest extends AbstractIntegrationTest {
 
-    private static final String TEST_USER = "John Doe";
+    private static final String TEST_USER_NAME = "johndoe@test.com";
+    private static final String TEST_USER_FULL_NAME = "John Doe";
 
 
     @Autowired
@@ -34,14 +35,14 @@ public class LinkApiTest extends AbstractIntegrationTest {
     @BeforeAll
     public static void beforeAll(@Autowired UserRepository userRepository) {
         User testUser = new User()
-                .withName(TEST_USER)
-                .withPassword("qwerty")
-                .withEmail("johndoe@test.com");
+                .withName(TEST_USER_NAME)
+                .withFullName(TEST_USER_FULL_NAME)
+                .withPassword("qwerty");
         userRepository.save(testUser);
     }
 
     @Test
-    @WithMockUser(username = TEST_USER)
+    @WithMockUser(username = TEST_USER_NAME)
     public void testCreateLink() throws Exception {
         LinkShortenInput linkShortenInput = new LinkShortenInput().setLongUrl("https://www.test.com/link-shortener");
 

@@ -15,6 +15,10 @@ dependencies {
     // Migration
     implementation "org.liquibase:liquibase-core:$liquibase_version"
 
+    // Mapping
+    implementation "org.mapstruct:mapstruct:$mapstruct_version"
+    annotationProcessor "org.mapstruct:mapstruct-processor:$mapstruct_version"
+
     // Test
     testImplementation "org.springframework.boot:spring-boot-starter-test:$spring_boot_version"
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junit_version"
@@ -24,4 +28,6 @@ dependencies {
     testImplementation "org.testcontainers:postgresql:$testcontainers_version"
     testImplementation "com.redis:testcontainers-redis:$redis_testcontainers_version"
     testImplementation "org.testcontainers:junit-jupiter:$testcontainers_version"
+    testCompileOnly "org.projectlombok:lombok:$lombok_version"
+    testAnnotationProcessor "org.projectlombok:lombok:$lombok_version"
 }
