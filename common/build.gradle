@@ -1,0 +1,19 @@
+plugins {
+    id 'java-test-fixtures'
+}
+
+group = 'com.elzhart.shortener.common'
+
+dependencies {
+
+    // Security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // Test
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junit_version"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junit_version"
+    testFixturesImplementation "org.springframework.boot:spring-boot-starter-test:$spring_boot_version"
+    testFixturesImplementation "org.testcontainers:postgresql:$testcontainers_version"
+    testFixturesImplementation "com.redis:testcontainers-redis:$redis_testcontainers_version"
+    testFixturesImplementation "org.testcontainers:junit-jupiter:$testcontainers_version"
+}
