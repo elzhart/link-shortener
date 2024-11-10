@@ -13,7 +13,7 @@ App for shorten users links and create links redirect statistic
 
 
 ## Modules:
-* [commons](commons)
+* [commons](common)
 - location of data common to other modules
 * [link-service](link-service)
 - accepts requests with the original address, analyzes them for validity and sends them to the link service, 
