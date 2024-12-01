@@ -28,7 +28,7 @@ public class LinkService {
 
     @Cacheable(value = "shortLink", key = "#longUrl")
     public String create(String longUrl, String username) {
-        User user = userService.findByUsername(username);
+        User user = userService.getByUsername(username);
         Link link = linkRepository.findByUrl(longUrl)
                 .orElse(linkRepository.save(new Link().withUrl(longUrl).withCreatedBy(user)));
 

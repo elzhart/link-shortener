@@ -1,10 +1,10 @@
 package com.elzhart.shortener.link.api;
 
+import com.elzhart.shortener.common.model.User;
 import com.elzhart.shortener.link.api.dto.user.AuthRequest;
 import com.elzhart.shortener.link.api.dto.user.CreateUserRequest;
 import com.elzhart.shortener.link.api.dto.user.UserDto;
 import com.elzhart.shortener.link.mapper.UserViewMapper;
-import com.elzhart.shortener.common.model.User;
 import com.elzhart.shortener.link.service.UserService;
 
 import org.springframework.http.HttpHeaders;
@@ -79,6 +79,6 @@ public class AuthController {
 
     @PostMapping("register")
     public UserDto register(@RequestBody @Valid CreateUserRequest request) {
-        return userService.create(request);
+        return userViewMapper.toUserView(userService.create(request));
     }
 }
